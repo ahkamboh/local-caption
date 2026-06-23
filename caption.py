@@ -292,6 +292,8 @@ def main():
                     help="never run demucs vocal isolation, even for music")
     ap.add_argument("--strict", action="store_true",
                     help="fail (non-zero exit) if the QA gate finds a problem with the output")
+    ap.add_argument("--no-footprint", dest="no_footprint", action="store_true",
+                    help="skip the caption-footprint SVG (a one-glance health map of the captions)")
     # --- custom style: describe ANY look; these override the chosen --style ---
     ap.add_argument("--fill", default=None, help="text colour, e.g. #ff2e88")
     ap.add_argument("--outline", default=None, help="outline colour, e.g. #000000")
@@ -324,6 +326,7 @@ def main():
 
     os.makedirs("work", exist_ok=True)
     base = os.path.splitext(os.path.basename(a.video))[0]
+    tj = None                              # word-level transcript path (set when we transcribe)
 
     # SONGS: isolate the vocal stem before ASR/alignment (cleaner words + timing on music).
     # Burning always uses the ORIGINAL video; only what we transcribe/align changes.
@@ -406,6 +409,11 @@ def main():
         qa_cmd.append("--strict")
     if subprocess.run(qa_cmd).returncode != 0 and a.strict:
         sys.exit("!! QA gate failed (--strict) — see the qa.json report above.")
+
+    # caption footprint: a one-glance SVG health map (reuses the transcript — basically free)
+    if tj and not a.no_footprint and os.path.exists(tj):
+        fp = os.path.splitext(out)[0] + ".footprint.svg"
+        subprocess.run(_py("scripts", "footprint.py") + [tj, "--video", a.video, "--out", fp], check=False)
 
 
 if __name__ == "__main__":

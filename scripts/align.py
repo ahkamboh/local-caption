@@ -46,7 +46,8 @@ def whisperx_path(a):
     for w in aligned.get("word_segments", []):
         if "start" in w and "end" in w:
             words.append({"text": w["word"].strip(),
-                          "start": round(float(w["start"]), 3), "end": round(float(w["end"]), 3)})
+                          "start": round(float(w["start"]), 3), "end": round(float(w["end"]), 3),
+                          "score": round(float(w.get("score", 0.0) or 0.0), 3)})
     return words
 
 
@@ -66,7 +67,7 @@ def universal_path(a):
     cleaned, warns = validate_timing.validate(tagged, input_count=len(display))
     if warns:
         print(f"[align] validation: {len(warns)} warning(s)", file=sys.stderr)
-    return [{"text": c["text"], "start": c.get("start"), "end": c.get("end")} for c in cleaned]
+    return [{"text": c["text"], "start": c.get("start"), "end": c.get("end"), "score": c.get("score")} for c in cleaned]
 
 
 def single_path(a):
@@ -88,7 +89,7 @@ def single_path(a):
     cleaned, warns = validate_timing.validate(tagged, input_count=len(display))
     if warns:
         print(f"[align] validation: {len(warns)} warning(s)", file=sys.stderr)
-    return [{"text": c["text"], "start": c.get("start"), "end": c.get("end")} for c in cleaned]
+    return [{"text": c["text"], "start": c.get("start"), "end": c.get("end"), "score": c.get("score")} for c in cleaned]
 
 
 def script_path(a):
@@ -109,7 +110,7 @@ def script_path(a):
     cleaned, warns = validate_timing.validate(tagged, input_count=len(display))
     if warns:
         print(f"[align] validation: {len(warns)} warning(s)", file=sys.stderr)
-    return [{"text": c["text"], "start": c.get("start"), "end": c.get("end")} for c in cleaned]
+    return [{"text": c["text"], "start": c.get("start"), "end": c.get("end"), "score": c.get("score")} for c in cleaned]
 
 
 def main():
