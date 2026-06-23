@@ -21,6 +21,9 @@ python caption.py vid.mp4  --srt                         # just write the .srt, 
 python caption.py vid.mp4  --from-srt my.srt             # burn an existing .srt, proportioned
 ```
 
+**15 famous styles** (bundled fonts included — Poppins, Anton, Bebas Neue, Archivo Black):
+`clean` · `bold` · `hormozi` · `green` · `beast` · `impact` · `bebas` · `tiktok` · `pill` · `boxed` · `yellow` · `neon` · `gradient` · `minimal` · `subtitle`
+
 ## ⚡ Setup — paste this into your AI agent
 
 Clone the repo, open it in your agent (Claude Code / Cursor / Codex / Grok / any), then paste:
@@ -52,7 +55,7 @@ Start by reading SKILL.md, then ask me for the file path.
 ## Requirements
 - **Python 3.10+** — torch supports 3.14; if `whisperx` lacks a wheel on a brand-new version, use 3.11–3.12
 - **ffmpeg** — macOS `brew install ffmpeg` · Ubuntu `sudo apt install ffmpeg` · Windows `winget install ffmpeg`
-- ~4 GB disk for models (auto-download on first run)
+- ~4 GB disk for models — `python setup.py` **downloads the Whisper model for you**, so the first caption is instant (no wait)
 
 ## Run it yourself (no agent)
 Set up once, then call scripts with the venv's python.
@@ -85,7 +88,7 @@ PY scripts/caption.py video.mp4 --lang en --content speech --style karaoke --pre
 - works on **speech and music / lyrics**
 - **forced alignment** = frame-accurate timing, never early or late
 - outputs **.srt / .vtt** (great for YouTube — selectable + SEO), a burned-in video, or animated styled captions
-- famous looks built in: **Hormozi, MrBeast, TikTok, neon, karaoke** (`scripts/caption.py`)
+- **15 famous burn styles** with **bundled fonts** (Poppins/Anton/Bebas Neue/Archivo Black) — hormozi, beast, tiktok, gradient, neon, pill, bebas… via `--style <name>`
 - translate subtitles into 30+ languages, fully **offline**
 - runs on **Windows, macOS, Linux** · 100% local · free · **MIT**
 

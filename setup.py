@@ -55,12 +55,19 @@ def main():
         print("   https://pytorch.org/get-started/locally/ into ./.venv-whisperx, then re-run setup.")
         sys.exit(r.returncode)
 
+    # Pre-fetch the Whisper 'small' model so the first caption is instant (clone -> setup -> ready).
+    print("-- downloading the Whisper 'small' model (~460 MB, one-time) --")
+    if subprocess.run([py, "-c", "import whisper; whisper.load_model('small')"]).returncode == 0:
+        print("ok: Whisper model ready")
+    else:
+        print("   (couldn't pre-fetch the model; it will auto-download on your first caption instead)")
+
     rel = r".venv-whisperx\Scripts\python" if os.name == "nt" else "./.venv-whisperx/bin/python"
-    print("\n== done ==  (models auto-download on first run)\n")
-    print("Run scripts with the venv python. Try:")
-    print(f"  {rel} scripts/align.py your_video.mp4 --lang en --out work/transcript.json")
-    print(f"  {rel} scripts/export-subs.py work/transcript.json --out work/subs")
-    print("  ffmpeg -i your_video.mp4 -vf subtitles=work/subs.srt -c:a copy captioned.mp4")
+    print("\n== done ==  engine + model + fonts ready.\n")
+    print("Caption a video — one command:")
+    print(f"  {rel} caption.py your_video.mp4")
+    print(f"  {rel} caption.py your_video.mp4 --style hormozi       # pick a famous look")
+    print("Styles: clean bold hormozi green beast impact bebas tiktok pill boxed yellow neon gradient minimal subtitle")
 
 
 if __name__ == "__main__":

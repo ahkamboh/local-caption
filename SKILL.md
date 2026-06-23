@@ -24,8 +24,9 @@ python caption.py <video> --lang ur --pos center --size 6  # other language / pl
 python caption.py <video> --srt                            # just write a .srt (no burn)
 python caption.py <video> --from-srt FILE                  # burn an existing .srt, proportioned
 ```
-Styles: `clean` (default), `bold`, `tiktok` (pill box), `hormozi` (big caps). Drop to the individual
-scripts below only when you need the raw transcript, custom rendering, or translation.
+15 styles (bundled fonts): `clean` (default) `bold` `hormozi` `green` `beast` `impact` `bebas` `tiktok`
+`pill` `boxed` `yellow` `neon` `gradient` `minimal` `subtitle`. Drop to the individual scripts below
+only when you need the raw transcript, custom rendering, or translation.
 
 ## Always run scripts with the venv's python — written here as `PY`:
 - **macOS / Linux:** `PY` = `./.venv-whisperx/bin/python`
