@@ -11,6 +11,7 @@ import sys
 import shutil
 import subprocess
 import venv
+import argparse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 VENV = os.path.join(HERE, ".venv-whisperx")
@@ -23,6 +24,10 @@ def venv_python():
 
 
 def main():
+    ap = argparse.ArgumentParser(description="local-caption setup")
+    ap.add_argument("--large", action="store_true",
+                    help="also pre-download whisper-large-v3 (~1.5GB) for best accuracy (--accurate)")
+    args = ap.parse_args()
     print("== local-caption setup ==")
 
     v = sys.version_info
@@ -61,6 +66,11 @@ def main():
         print("ok: Whisper model ready")
     else:
         print("   (couldn't pre-fetch the model; it will auto-download on your first caption instead)")
+
+    if args.large:
+        print("-- downloading whisper-large-v3 (~1.5 GB, for --accurate) --")
+        subprocess.run([py, "-c", "from faster_whisper import WhisperModel; "
+                        "WhisperModel('large-v3', device='cpu', compute_type='int8')"])
 
     rel = r".venv-whisperx\Scripts\python" if os.name == "nt" else "./.venv-whisperx/bin/python"
     print("\n== done ==  engine + model + fonts ready.\n")

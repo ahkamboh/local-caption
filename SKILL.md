@@ -28,6 +28,22 @@ python caption.py <video> --from-srt FILE                  # burn an existing .s
 `pill` `boxed` `yellow` `neon` `gradient` `minimal` `subtitle`. Drop to the individual scripts below
 only when you need the raw transcript, custom rendering, or translation.
 
+**Best accuracy:** add `--accurate` (uses `openai/whisper-large-v3`). The Hinglish path already uses
+large-v3. Pre-fetch it once with `python setup.py --large` (otherwise it downloads on first `--accurate`).
+
+**Custom style — build ANY look the user describes.** Map the user's words to these flags (they override
+`--style`):
+- `--font <name|path>` — a bundled font (`Poppins-Bold`, `Poppins-Black`, `Anton-Regular`, `BebasNeue-Regular`, `ArchivoBlack-Regular`) or any `.ttf` path
+- `--fill #hex` (text colour) · `--outline #hex` · `--box #hex|#hexAA|none` (pill behind text)
+- `--caps` / `--no-caps` · `--gradient "#hex,#hex,#hex"` · `--glow` · `--ow N` (outline thickness)
+- `--size <pct>` (height) · `--pos bottom|center|top`
+
+Example — user says *"hot-pink caps in a dark rounded box, big, Anton font"* →
+```
+python caption.py v.mp4 --fill "#ff3da6" --box "#10141ae0" --caps --font Anton-Regular.ttf --size 6
+```
+To make a brand-new **named** style permanent, add an entry to the `STYLES` dict in `caption.py`.
+
 ## Always run scripts with the venv's python — written here as `PY`:
 - **macOS / Linux:** `PY` = `./.venv-whisperx/bin/python`
 - **Windows:** `PY` = `.venv-whisperx\Scripts\python`

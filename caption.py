@@ -104,8 +104,15 @@ def parse_srt(path):
 
 
 def find_font(preferred=None, user=None):
-    if user and os.path.exists(user):
-        return user
+    if user:                                  # --font accepts a path OR a bundled font name
+        if os.path.exists(user):
+            return user
+        p = os.path.join(FONTS, user)
+        if os.path.exists(p):
+            return p
+        p2 = os.path.join(FONTS, user + ".ttf")
+        if os.path.exists(p2):
+            return p2
     if preferred:
         p = os.path.join(FONTS, preferred)
         if os.path.exists(p):
@@ -116,6 +123,18 @@ def find_font(preferred=None, user=None):
         if os.path.exists(c):
             return c
     return None
+
+
+def _hex(s):
+    s = s.strip().lstrip("#")
+    return tuple(int(s[i:i + 2], 16) for i in range(0, min(len(s), 8), 2))
+
+
+def _box(s):
+    if s is None or s.strip().lower() in ("none", "off", ""):
+        return None
+    c = _hex(s)
+    return c if len(c) == 4 else (c[0], c[1], c[2], 235)   # default ~opaque if no alpha given
 
 
 def _vgrad(Image, w, h, stops):
@@ -198,12 +217,11 @@ def render_caption(text, vw, fs, st, font_path, out_png, PIL):
     return cw, ch
 
 
-def burn(video, cues, w, h, style, pos, size_pct, user_font, out):
+def burn(video, cues, w, h, st, pos, size_pct, user_font, out):
     try:
         from PIL import Image, ImageDraw, ImageFont, ImageFilter
     except ImportError:
         sys.exit("!! captions are rendered with Pillow — install it:  pip install Pillow")
-    st = STYLES[style]
     fs = max(14, round(h * (size_pct if size_pct else st["size"]) / 100.0))
     fp = find_font(st["font"], user_font)
     if not fp:
@@ -242,8 +260,21 @@ def main():
     ap.add_argument("--lang", default="en")
     ap.add_argument("--hinglish", action="store_true")
     ap.add_argument("--pos", default="bottom", choices=list(ALIGN))
-    ap.add_argument("--size", type=float, default=0.0, help="override caption height %% of video")
-    ap.add_argument("--font", default=None)
+    ap.add_argument("--size", type=float, default=0.0, help="override caption height %% of video height")
+    ap.add_argument("--font", default=None, help="bundled font name or path to a .ttf")
+    ap.add_argument("--model", default="small", choices=["small", "medium", "large-v3"],
+                    help="ASR model. small = fast (default); large-v3 = best accuracy (~3GB, slower)")
+    ap.add_argument("--accurate", action="store_true", help="use openai/whisper-large-v3 (best quality)")
+    # --- custom style: describe ANY look; these override the chosen --style ---
+    ap.add_argument("--fill", default=None, help="text colour, e.g. #ff2e88")
+    ap.add_argument("--outline", default=None, help="outline colour, e.g. #000000")
+    ap.add_argument("--box", default=None, help="box colour #RRGGBB / #RRGGBBAA, or 'none'")
+    ap.add_argument("--caps", dest="caps", action="store_const", const=True, default=None)
+    ap.add_argument("--no-caps", dest="caps", action="store_const", const=False)
+    ap.add_argument("--gradient", default=None, help="gradient fill, e.g. '#5cffd0,#3fa9ff,#7b5cff'")
+    ap.add_argument("--glow", dest="glow", action="store_const", const=True, default=None)
+    ap.add_argument("--no-glow", dest="glow", action="store_const", const=False)
+    ap.add_argument("--ow", type=float, default=None, help="outline thickness multiplier")
     ap.add_argument("--srt", action="store_true")
     ap.add_argument("--from-srt", dest="from_srt", default=None)
     ap.add_argument("--translate", default=None)
@@ -255,15 +286,16 @@ def main():
             sys.exit(f"!! {tool} not found — install ffmpeg (brew/apt/winget install ffmpeg).")
     if not os.path.exists(a.video):
         sys.exit(f"!! no such file: {a.video}")
+    model = "large-v3" if a.accurate else a.model
 
     os.makedirs("work", exist_ok=True)
     base = os.path.splitext(os.path.basename(a.video))[0]
     srt = a.from_srt
     if not srt:
         tj = os.path.join("work", f"{base}.transcript.json")
-        cmd = _py("scripts", "align.py") + [a.video, "--out", tj]
+        cmd = _py("scripts", "align.py") + [a.video, "--out", tj, "--model", model]
         cmd += (["--code-switch", "--dual", "hi", "en"] if a.hinglish else ["--lang", a.lang])
-        print(f"[local-caption] transcribing + aligning ({'hinglish' if a.hinglish else a.lang}) ...")
+        print(f"[local-caption] transcribing + aligning ({'hinglish' if a.hinglish else a.lang}, {model}) ...")
         if subprocess.run(cmd).returncode != 0 or not os.path.exists(tj):
             sys.exit("!! transcription failed. Run `python setup.py` first (installs the engine + model).")
         subprocess.run(_py("scripts", "export-subs.py") + [tj, "--out", os.path.join("work", base)], check=True)
@@ -275,12 +307,29 @@ def main():
         print(f"[local-caption] subtitles -> {srt}")
         return
 
+    # effective style = chosen preset + any custom overrides (so users can describe any look)
+    st = dict(STYLES[a.style])
+    if a.fill:
+        st["fill"] = _hex(a.fill)[:3]
+    if a.outline:
+        st["outline"] = _hex(a.outline)[:3]
+    if a.box is not None:
+        st["box"] = _box(a.box)
+    if a.caps is not None:
+        st["caps"] = a.caps
+    if a.glow is not None:
+        st["glow"] = a.glow
+    if a.gradient:
+        st["grad"] = [_hex(c)[:3] for c in a.gradient.split(",") if c.strip()]
+    if a.ow is not None:
+        st["ow"] = a.ow
+
     cues = parse_srt(srt)
     w, h = probe_dims(a.video)
     out = a.out or f"{base}.captioned.mp4"
-    fs = round(h * (a.size if a.size else STYLES[a.style]["size"]) / 100.0)
+    fs = round(h * (a.size if a.size else st["size"]) / 100.0)
     print(f"[local-caption] burning '{a.style}' — {w}x{h}, {fs}px, {a.pos} -> {out}")
-    if not burn(a.video, cues, w, h, a.style, a.pos, a.size, a.font, out):
+    if not burn(a.video, cues, w, h, st, a.pos, a.size, a.font, out):
         sys.exit("!! burn failed.")
     print(f"[local-caption] done -> {out}")
 

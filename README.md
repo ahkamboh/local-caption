@@ -17,6 +17,8 @@ That's it. It transcribes, aligns the timing to the audio, and burns clean capti
 python caption.py reel.mp4 --hinglish --style tiktok     # Hinglish + TikTok box look
 python caption.py talk.mp4 --style hormozi --pos center  # big bold caps, centered
 python caption.py clip.mp4 --lang ur --size 6            # Urdu, slightly larger
+python caption.py talk.mp4 --accurate                    # best quality (openai/whisper-large-v3)
+python caption.py vid.mp4  --fill "#ff3da6" --box "#000a" --caps   # describe your OWN look
 python caption.py vid.mp4  --srt                         # just write the .srt, no burn
 python caption.py vid.mp4  --from-srt my.srt             # burn an existing .srt, proportioned
 ```
@@ -55,7 +57,7 @@ Start by reading SKILL.md, then ask me for the file path.
 ## Requirements
 - **Python 3.10+** — torch supports 3.14; if `whisperx` lacks a wheel on a brand-new version, use 3.11–3.12
 - **ffmpeg** — macOS `brew install ffmpeg` · Ubuntu `sudo apt install ffmpeg` · Windows `winget install ffmpeg`
-- ~4 GB disk for models — `python setup.py` **downloads the Whisper model for you**, so the first caption is instant (no wait)
+- ~4 GB disk for models — `python setup.py` **downloads the Whisper model for you** (instant first caption). Add `python setup.py --large` to also fetch `whisper-large-v3` for `--accurate`.
 
 ## Run it yourself (no agent)
 Set up once, then call scripts with the venv's python.
