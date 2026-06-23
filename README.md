@@ -4,6 +4,23 @@
 
 > Built for **Claude Code, Cursor, Codex, Grok**, and any IDE/agent. Point your agent at this repo and ask it to caption your video.
 
+## ⚡ Easiest way — ONE command
+
+```bash
+python caption.py myvideo.mp4
+```
+
+That's it. It transcribes, aligns the timing to the audio, and burns clean captions that are **auto-sized and positioned to fit the video** (proportional on any resolution — landscape *or* vertical), English by default → `myvideo.captioned.mp4`. No styling, no tweaking. Works even if your ffmpeg lacks libass (it falls back to rendering captions and compositing them with the core `overlay` filter).
+
+**Power users** — same command, optional flags:
+```bash
+python caption.py reel.mp4 --hinglish --style tiktok     # Hinglish + TikTok box look
+python caption.py talk.mp4 --style hormozi --pos center  # big bold caps, centered
+python caption.py clip.mp4 --lang ur --size 6            # Urdu, slightly larger
+python caption.py vid.mp4  --srt                         # just write the .srt, no burn
+python caption.py vid.mp4  --from-srt my.srt             # burn an existing .srt, proportioned
+```
+
 ## ⚡ Setup — paste this into your AI agent
 
 Clone the repo, open it in your agent (Claude Code / Cursor / Codex / Grok / any), then paste:

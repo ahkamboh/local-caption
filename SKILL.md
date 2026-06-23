@@ -13,6 +13,20 @@ python setup.py        # cross-platform: creates ./.venv-whisperx and installs e
 ffmpeg: macOS `brew install ffmpeg` · Ubuntu `sudo apt install ffmpeg` · Windows `winget install ffmpeg`.
 Models (Whisper `small`, MMS_FA, whisperX) auto-download on first run.
 
+## Easiest path — the one-command wrapper (PREFER THIS)
+For "caption this video" requests, just run the top-level wrapper. It does transcribe → align →
+burn with **auto-proportioned** captions (correct size/spacing/alignment for any resolution), and
+falls back to a libass-free renderer (Pillow + `overlay`) if the user's ffmpeg has no subtitle support:
+```
+python caption.py <video>                                  # English, clean, proportioned -> <video>.captioned.mp4
+python caption.py <video> --hinglish --style tiktok        # Hinglish + TikTok box
+python caption.py <video> --lang ur --pos center --size 6  # other language / placement / size
+python caption.py <video> --srt                            # just write a .srt (no burn)
+python caption.py <video> --from-srt FILE                  # burn an existing .srt, proportioned
+```
+Styles: `clean` (default), `bold`, `tiktok` (pill box), `hormozi` (big caps). Drop to the individual
+scripts below only when you need the raw transcript, custom rendering, or translation.
+
 ## Always run scripts with the venv's python — written here as `PY`:
 - **macOS / Linux:** `PY` = `./.venv-whisperx/bin/python`
 - **Windows:** `PY` = `.venv-whisperx\Scripts\python`

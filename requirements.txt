@@ -11,3 +11,5 @@ soundfile
 argostranslate
 # MMS forced alignment romanizes non-Latin scripts with uroman:
 uroman
+# Pillow renders burned-in captions when your ffmpeg lacks libass (the fallback path):
+Pillow
