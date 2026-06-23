@@ -10,9 +10,9 @@ Hinglish-first · speech + music · forced-alignment timing · free · MIT · fo
 ## 🚀 Quick start
 
 ### With any AI coding agent
-**Claude Code · Cursor · Codex** auto-read their pointer file (`CLAUDE.md` · `.cursorrules` · `AGENTS.md`) — open the folder and just say *“caption ./myvideo.mp4”*.
+Works with **Claude Code · Cursor · GitHub Copilot · ChatGPT · Gemini · Grok** — or any other.
 
-With **Grok · GitHub Copilot · Windsurf · Cline · Aider · Continue · Gemini CLI · Zed · Roo Code** — or any chat agent — paste this:
+Open this folder in your agent and just say *“caption ./myvideo.mp4”*. Or paste this:
 
 ```
 You are a captioning agent. Read ./SKILL.md in this repo and follow it exactly.
