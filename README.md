@@ -26,12 +26,6 @@ in any language (default English; Hinglish supported), for speech AND music.
 4. show me the output path (<file>.captioned.mp4)
 ```
 
-### Or in the terminal
-```bash
-python setup.py                 # one time: installs everything + the model
-python caption.py myvideo.mp4   # → myvideo.captioned.mp4
-```
-
 ---
 
 ## ✅ Great for
