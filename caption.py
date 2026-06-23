@@ -290,6 +290,8 @@ def main():
                          "music=force; speech=never (default: auto)")
     ap.add_argument("--no-isolate", dest="no_isolate", action="store_true",
                     help="never run demucs vocal isolation, even for music")
+    ap.add_argument("--strict", action="store_true",
+                    help="fail (non-zero exit) if the QA gate finds a problem with the output")
     # --- custom style: describe ANY look; these override the chosen --style ---
     ap.add_argument("--fill", default=None, help="text colour, e.g. #ff2e88")
     ap.add_argument("--outline", default=None, help="outline colour, e.g. #000000")
@@ -397,6 +399,13 @@ def main():
     if not burn(a.video, cues, w, h, st, a.pos, a.size, a.font, out):
         sys.exit("!! burn failed.")
     print(f"[local-caption] done -> {out}")
+
+    # fast QA gate (deterministic, no tokens): cue sanity + output validity -> work/<base>.qa.json
+    qa_cmd = _py("scripts", "qa.py") + [a.video, out, srt]
+    if a.strict:
+        qa_cmd.append("--strict")
+    if subprocess.run(qa_cmd).returncode != 0 and a.strict:
+        sys.exit("!! QA gate failed (--strict) — see the qa.json report above.")
 
 
 if __name__ == "__main__":

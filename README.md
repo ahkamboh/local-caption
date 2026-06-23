@@ -57,6 +57,7 @@ Same command, add a flag:
 | Fix their/there, your/you're | `--grammar` |
 | Just a subtitle file | `--srt` |
 | Faster (lower accuracy) | `--fast` |
+| Fail loudly if the output is broken | `--strict` |
 
 ---
 
@@ -124,6 +125,7 @@ local-caption/
 │  ├─ mms_align.py         universal aligner (1100+ languages)
 │  ├─ isolate_vocals.py    Demucs vocal isolation for songs
 │  ├─ grammar_fix.py       offline homophone fix (their/there)
+│  ├─ qa.py                fast QA gate → qa.json (cue + output checks)
 │  ├─ export-subs.py       words → .srt / .vtt
 │  ├─ multilang-subs.py    offline subtitle translation
 │  └─ validate_timing.py
@@ -143,6 +145,7 @@ local-caption/
 2. **Words** — Whisper transcribes the speech (or you supply them with `--script`).
 3. **Timing** — every word is force-aligned to the waveform, so it lands exactly on the sound.
 4. **Burn** — clean, proportional captions are rendered and overlaid → `*.captioned.mp4`.
+5. **Check** — a fast QA gate validates the result (cue timing + the output file) and writes `qa.json`.
 
 ---
 

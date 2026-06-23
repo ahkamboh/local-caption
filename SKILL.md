@@ -96,6 +96,7 @@ Needs `demucs` (installed by `python setup.py`); falls back to the original audi
 - `multilang-subs.py` — translate subtitles into many languages, **offline**.
 - `grammar_fix.py` — **offline** homophone/grammar fix on an `.srt` (timing preserved); used by `--grammar`.
 - `isolate_vocals.py` — **Demucs** vocal isolation for songs + a music-vs-speech probe; used by `--content`.
+- `qa.py` — fast deterministic **QA gate** (cue sanity + ffprobe output check) → `work/<base>.qa.json`. Runs automatically after every burn; `--strict` makes a broken output exit non-zero.
 - `caption.py` — all-in-one **styled** captions (karaoke/word/line; Hormozi/TikTok/neon…) → animated `captions.js`.
 
 ## Caption a video (the main job) — default language = English
