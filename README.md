@@ -1,4 +1,4 @@
-# anycaption — add captions to any video, in any language, for any AI agent
+# polycaption — add captions to any video, in any language, for any AI agent
 
 **Free & open-source captioning that any AI agent can run — on Windows, macOS, and Linux.** Add accurate, perfectly-timed captions / subtitles to **any video or song**, in **any language** (English by default), for both **speech and music** — with first-class **Hinglish / code-switched** support. Words come from speech recognition; **timing comes from forced alignment on the waveform**, so captions never drift early or late.
 

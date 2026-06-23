@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# anycaption setup (macOS / Linux). Windows: run `setup.bat` or `python setup.py`.
+# polycaption setup (macOS / Linux). Windows: run `setup.bat` or `python setup.py`.
 # Cross-platform logic lives in setup.py; this is just a convenience wrapper.
 set -euo pipefail
 cd "$(dirname "$0")"

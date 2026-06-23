@@ -1,4 +1,4 @@
-# anycaption — Python deps for the ./.venv-whisperx environment
+# polycaption — Python deps for the ./.venv-whisperx environment
 # (run `bash setup.sh` which creates the venv and installs these)
 openai-whisper
 faster-whisper

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""anycaption — cross-platform setup (Windows / macOS / Linux).
+"""polycaption — cross-platform setup (Windows / macOS / Linux).
 
     python setup.py        (or: python3 setup.py)
 
@@ -23,7 +23,7 @@ def venv_python():
 
 
 def main():
-    print("== anycaption setup ==")
+    print("== polycaption setup ==")
 
     v = sys.version_info
     print(f"python {v.major}.{v.minor}.{v.micro}  ({sys.platform})")
