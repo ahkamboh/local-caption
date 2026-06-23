@@ -27,6 +27,19 @@ in any language (default English; Hinglish supported), for speech AND music.
 
 ---
 
+## ✅ Great for
+
+| Use case | What you get |
+|---|---|
+| 🎙 **Podcasts & interviews** | accurate, clean word-by-word captions |
+| 🗣 **Speech** — talking-head, UGC, explainers, courses, ads | tight, readable subtitles |
+| 🎵 **Songs & lyric videos** | Demucs vocal isolation → clean lyrics |
+| 📱 **TikTok · Reels · YouTube Shorts** | viral burned-in caption styles |
+| 🌍 **Any language + Hinglish** | 99 languages, code-switch built in |
+| ⏱ **Accurate word timestamps** | forced alignment → perfect `.srt` / `.vtt` |
+
+---
+
 ## 🚀 Quick start
 
 ```bash
@@ -151,3 +164,7 @@ local-caption/
 ## 📄 License
 
 **MIT** — free for anyone, including AI agents. Built by [Ali Hamza Kamboh](https://alihamzakamboh.com).
+
+---
+
+<sub>**Keywords:** video captions · automatic subtitles · subtitle generator · add subtitles to a video · burn / hardcode captions · open captions · accurate captions · word-level timestamps · forced alignment · SRT & VTT generator · speech-to-text · ASR · audio/video transcription · transcribe podcasts · interview transcription · podcast captions · song lyrics captions · lyric video · karaoke captions · music captions · vocal isolation · Hinglish captions · code-switching · multilingual subtitles · translated subtitles · any language (99) · TikTok captions · Reels captions · YouTube Shorts subtitles · Instagram captions · Hormozi-style captions · viral captions · offline · local · privacy-first · no upload · free · open-source · Whisper · whisper-large-v3 · faster-whisper · whisperX · Meta MMS forced alignment · Demucs · ffmpeg · Python CLI · cross-platform (Windows / macOS / Linux) · AI-agent captioning for Claude Code, Cursor, Codex, Grok.</sub>
