@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>local-caption — captions for any video, in any language, 100% local</title>
+  <meta name="description" content="Free, open-source captioning that any AI agent can run. Add accurate, perfectly-timed captions/subtitles to any video or song in 99 languages (Hinglish-first), for speech and music. 100% local — nothing uploaded." />
+  <meta property="og:title" content="local-caption" />
+  <meta property="og:description" content="Add captions to any video, in any language — 100% local. Hinglish-first, speech + music, forced-alignment timing. Free, MIT, for any AI agent." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0c0c10; --surface:#15151c; --text:#ececed; --muted:#9a9aa6;
+      --accent:#ff6b4a; --accent2:#ffd0a8; --border:rgba(255,255,255,.09);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg); color:var(--text);
+      font-family:"Space Grotesk",system-ui,sans-serif;
+      line-height:1.6; -webkit-font-smoothing:antialiased;
+      background-image:radial-gradient(60% 50% at 50% -5%, rgba(255,107,74,.14), transparent 70%);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+    code,.mono{font-family:"JetBrains Mono",monospace}
+
+    nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0}
+    .brand{font-weight:700;font-size:18px;letter-spacing:-.01em}
+    .brand b{color:var(--accent)}
+    .nav-link{color:var(--muted);font-size:15px;border:1px solid var(--border);padding:8px 16px;border-radius:999px;transition:.2s}
+    .nav-link:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
+
+    .hero{padding:66px 0 40px;text-align:center}
+    .pill{display:inline-block;font-size:13px;color:var(--accent2);background:rgba(255,107,74,.1);border:1px solid rgba(255,107,74,.25);padding:6px 14px;border-radius:999px;margin-bottom:26px;letter-spacing:.02em}
+    h1{font-size:clamp(34px,6vw,58px);line-height:1.05;font-weight:700;letter-spacing:-.03em}
+    h1 .g{background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .sub{color:var(--muted);font-size:clamp(16px,2.2vw,20px);max-width:620px;margin:22px auto 0}
+
+    .cmd{margin:38px auto 0;max-width:560px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-align:left;overflow:hidden}
+    .cmd-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .dot{width:11px;height:11px;border-radius:50%}
+    .cmd-body{padding:18px 20px;font-size:15px}
+    .cmd-body .p{color:var(--accent)}
+    .cmd-body .o{color:var(--muted)}
+    .copy{margin-left:auto;font-family:"JetBrains Mono";font-size:12px;color:var(--muted);background:none;border:1px solid var(--border);border-radius:7px;padding:4px 10px;cursor:pointer;transition:.2s}
+    .copy:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
+
+    .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+    .btn{padding:13px 26px;border-radius:11px;font-weight:600;font-size:16px;transition:.2s}
+    .btn.primary{background:var(--accent);color:#1a0a05}
+    .btn.primary:hover{filter:brightness(1.08)}
+    .btn.ghost{border:1px solid var(--border);color:var(--text)}
+    .btn.ghost:hover{border-color:rgba(255,255,255,.3)}
+
+    .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:46px 0 8px;color:var(--muted);font-size:14px}
+    .stats span{border:1px solid var(--border);border-radius:999px;padding:6px 14px}
+    .stats b{color:var(--text);font-weight:600}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:50px 0}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px}
+    .card h3{font-size:17px;font-weight:600;margin-bottom:7px}
+    .card h3 i{color:var(--accent);font-style:normal;margin-right:8px}
+    .card p{color:var(--muted);font-size:14.5px}
+
+    .agents{text-align:center;margin:14px 0 44px;color:var(--muted);font-size:15px}
+    .agents b{color:var(--text);font-weight:600}
+
+    footer{border-top:1px solid var(--border);padding:28px 0 50px;text-align:center;color:var(--muted);font-size:14px}
+    footer a{color:var(--accent2)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <div class="brand">🎬 local<b>-</b>caption</div>
+      <a class="nav-link" href="https://github.com/ahkamboh/local-caption">GitHub ↗</a>
+    </nav>
+
+    <header class="hero">
+      <span class="pill">free · open-source · MIT · 100% local</span>
+      <h1>Add captions to any video.<br/><span class="g">Any language. Locally.</span></h1>
+      <p class="sub">Accurate, perfectly-timed captions &amp; subtitles for any video or song — Hinglish-first, speech <em>and</em> music. Words from speech recognition, timing from forced alignment on the waveform. Nothing uploaded.</p>
+
+      <div class="cmd">
+        <div class="cmd-bar">
+          <span class="dot" style="background:#ff5f57"></span>
+          <span class="dot" style="background:#febc2e"></span>
+          <span class="dot" style="background:#28c840"></span>
+          <button class="copy" id="copy">copy</button>
+        </div>
+        <div class="cmd-body mono">
+          <div><span class="p">$</span> python caption.py myvideo.mp4</div>
+          <div class="o">→ myvideo.captioned.mp4</div>
+        </div>
+      </div>
+
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/ahkamboh/local-caption">View on GitHub</a>
+        <a class="btn ghost" href="https://github.com/ahkamboh/local-caption/blob/master/SKILL.md">Read the docs</a>
+      </div>
+
+      <div class="stats">
+        <span><b>99</b> languages</span>
+        <span><b>100%</b> local</span>
+        <span><b>speech</b> + music</span>
+        <span><b>MIT</b> licensed</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card"><h3><i>◐</i>Any language + Hinglish</h3><p>English by default, first-class Hinglish / code-switch, and 1100+ languages aligned via MMS.</p></div>
+      <div class="card"><h3><i>♪</i>Speech &amp; music</h3><p>Podcasts, interviews, talking-head — and songs, with Demucs vocal isolation for clean lyrics.</p></div>
+      <div class="card"><h3><i>⏱</i>Never drifts</h3><p>Forced alignment pins every word to the waveform, so captions are never early or late.</p></div>
+      <div class="card"><h3><i>✦</i>15 famous styles</h3><p>Hormozi, TikTok, beast, neon, gradient… with bundled fonts. Or describe your own look.</p></div>
+      <div class="card"><h3><i>⌘</i>Runs on your machine</h3><p>Windows · macOS · Linux. The model downloads once, then it works fully offline.</p></div>
+      <div class="card"><h3><i>↯</i>For any AI agent</h3><p>Claude Code, Cursor, Codex, ChatGPT, Gemini, Grok — point it at the repo and say “caption this”.</p></div>
+    </section>
+
+    <p class="agents">One command, or hand it to your agent: <b>“caption ./myvideo.mp4”</b>.</p>
+
+    <footer>
+      MIT · built by <a href="https://alihamzakamboh.com">Ali Hamza Kamboh</a> · <a href="https://github.com/ahkamboh/local-caption">github.com/ahkamboh/local-caption</a>
+    </footer>
+  </div>
+
+  <script>
+    const btn = document.getElementById('copy');
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText('python caption.py myvideo.mp4').then(() => {
+        btn.textContent = 'copied ✓';
+        setTimeout(() => (btn.textContent = 'copy'), 1600);
+      });
+    });
+  </script>
+</body>
+</html>
