@@ -1,0 +1,15 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="local-caption">
+  <defs>
+    <linearGradient id="lc" x1="6" y1="6" x2="42" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff6b4a"/>
+      <stop offset="1" stop-color="#ffd0a8"/>
+    </linearGradient>
+  </defs>
+  <!-- caption speech bubble with a tail (bottom-left) -->
+  <path d="M11 6h26a7 7 0 0 1 7 7v15a7 7 0 0 1-7 7H22l-8 7v-7h-3a7 7 0 0 1-7-7V13a7 7 0 0 1 7-7z" fill="url(#lc)"/>
+  <!-- caption lines knocked out -->
+  <rect x="11.5" y="15" width="16" height="3.6" rx="1.8" fill="#0c0c10"/>
+  <rect x="30" y="15" width="6.5" height="3.6" rx="1.8" fill="#0c0c10" opacity=".4"/>
+  <rect x="11.5" y="23" width="9" height="3.6" rx="1.8" fill="#0c0c10" opacity=".4"/>
+  <rect x="23" y="23" width="13.5" height="3.6" rx="1.8" fill="#0c0c10"/>
+</svg>

@@ -1,9 +1,21 @@
-# 🎬 local-caption
+<p align="center">
+  <img src="assets/logo.svg" width="76" alt="local-caption logo" />
+</p>
 
-Add captions to any video, in any language — **100% local, no cloud**.
-Hinglish-first · speech + music · forced-alignment timing · free · MIT · for any AI agent.
+<h1 align="center">local-caption</h1>
 
-![License](https://img.shields.io/badge/license-MIT-green) ![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![Platforms](https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-lightgrey) ![Local](https://img.shields.io/badge/100%25-local%20·%20offline-success) ![Languages](https://img.shields.io/badge/languages-99-orange)
+<p align="center">
+  Add captions to any video or song, in any language — <b>100% local, no cloud</b>.<br/>
+  Hinglish-first · speech + music · forced-alignment timing · free · MIT · for any AI agent.
+</p>
+
+<p align="center">
+  <a href="https://ahkamboh.github.io/local-caption/"><b>🌐 Live site &amp; one-paste prompt →</b></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT" /> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python 3.10+" /> <img src="https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-lightgrey" alt="Platforms" /> <img src="https://img.shields.io/badge/100%25-local%20·%20offline-success" alt="100% local" /> <img src="https://img.shields.io/badge/languages-99-orange" alt="99 languages" />
+</p>
 
 ---
 

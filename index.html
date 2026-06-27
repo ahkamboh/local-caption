@@ -7,6 +7,7 @@
   <meta name="description" content="Free, open-source captioning that any AI agent can run. Add accurate, perfectly-timed captions/subtitles to any video or song in 99 languages (Hinglish-first), for speech and music. 100% local — nothing uploaded." />
   <meta property="og:title" content="local-caption" />
   <meta property="og:description" content="Add captions to any video, in any language — 100% local. Hinglish-first, speech + music, forced-alignment timing. Free, MIT, for any AI agent." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -28,7 +29,8 @@
     code,.mono{font-family:"JetBrains Mono",monospace}
 
     nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0}
-    .brand{font-weight:700;font-size:18px;letter-spacing:-.01em}
+    .brand{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:18px;letter-spacing:-.01em}
+    .brand .logo{display:block;filter:drop-shadow(0 4px 12px rgba(255,107,74,.35))}
     .brand b{color:var(--accent)}
     .nav-link{color:var(--muted);font-size:15px;border:1px solid var(--border);padding:8px 16px;border-radius:999px;transition:.2s}
     .nav-link:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
@@ -55,6 +57,21 @@
     .btn.ghost{border:1px solid var(--border);color:var(--text)}
     .btn.ghost:hover{border-color:rgba(255,255,255,.3)}
 
+    /* copy-paste prompt section */
+    .promptbox{margin:64px 0 8px}
+    .ph{text-align:center;margin-bottom:22px}
+    .ph h2{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.02em}
+    .ph h2 .g{background:linear-gradient(100deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .ph p{color:var(--muted);font-size:15.5px;max-width:560px;margin:12px auto 0}
+    .prompt{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 30px 70px -40px rgba(255,107,74,.4)}
+    .prompt-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--border)}
+    .prompt-bar .tag{margin-left:6px;font-family:"JetBrains Mono";font-size:12px;color:var(--muted)}
+    .prompt pre{margin:0;padding:22px 24px;font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.75;color:#d4d4dc;white-space:pre-wrap;word-break:break-word;max-height:none}
+    .prompt pre .c{color:var(--muted)}
+    .prompt pre .p{color:var(--accent)}
+    .copy2{margin-left:auto;font-family:"JetBrains Mono";font-size:12.5px;color:#1a0a05;background:var(--accent);border:none;border-radius:8px;padding:6px 14px;cursor:pointer;font-weight:600;transition:.2s}
+    .copy2:hover{filter:brightness(1.08)}
+
     .stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:46px 0 8px;color:var(--muted);font-size:14px}
     .stats span{border:1px solid var(--border);border-radius:999px;padding:6px 14px}
     .stats b{color:var(--text);font-weight:600}
@@ -75,7 +92,17 @@
 <body>
   <div class="wrap">
     <nav>
-      <div class="brand">🎬 local<b>-</b>caption</div>
+      <a class="brand" href="./" aria-label="local-caption home">
+        <svg class="logo" width="30" height="30" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs><linearGradient id="lc" x1="6" y1="6" x2="42" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6b4a"/><stop offset="1" stop-color="#ffd0a8"/></linearGradient></defs>
+          <path d="M11 6h26a7 7 0 0 1 7 7v15a7 7 0 0 1-7 7H22l-8 7v-7h-3a7 7 0 0 1-7-7V13a7 7 0 0 1 7-7z" fill="url(#lc)"/>
+          <rect x="11.5" y="15" width="16" height="3.6" rx="1.8" fill="#0c0c10"/>
+          <rect x="30" y="15" width="6.5" height="3.6" rx="1.8" fill="#0c0c10" opacity=".4"/>
+          <rect x="11.5" y="23" width="9" height="3.6" rx="1.8" fill="#0c0c10" opacity=".4"/>
+          <rect x="23" y="23" width="13.5" height="3.6" rx="1.8" fill="#0c0c10"/>
+        </svg>
+        <span>local<b>-</b>caption</span>
+      </a>
       <a class="nav-link" href="https://github.com/ahkamboh/local-caption">GitHub ↗</a>
     </nav>
 
@@ -119,7 +146,38 @@
       <div class="card"><h3><i>↯</i>For any AI agent</h3><p>Claude Code, Cursor, Codex, ChatGPT, Gemini, Grok — point it at the repo and say “caption this”.</p></div>
     </section>
 
-    <p class="agents">One command, or hand it to your agent: <b>“caption ./myvideo.mp4”</b>.</p>
+    <section class="promptbox" id="prompt">
+      <div class="ph">
+        <h2>Copy this. Paste into your <span class="g">agent</span>.</h2>
+        <p>Claude Code · Cursor · Codex · ChatGPT · Gemini · Grok — any agent. It clones, sets up, and captions your file. 100% on your machine, nothing uploaded.</p>
+      </div>
+      <div class="prompt">
+        <div class="prompt-bar">
+          <span class="dot" style="background:#ff5f57"></span>
+          <span class="dot" style="background:#febc2e"></span>
+          <span class="dot" style="background:#28c840"></span>
+          <span class="tag">setup prompt</span>
+          <button class="copy2" id="copyPrompt">copy prompt</button>
+        </div>
+<pre id="promptText"><span class="c"># paste me into your AI agent ↓</span>
+You are a captioning agent for the open-source repo github.com/ahkamboh/local-caption.
+It adds accurate, perfectly-timed captions to any video or song, in any language —
+100% on my machine, nothing uploaded.
+
+1. clone + set up (one time):
+   <span class="p">git clone https://github.com/ahkamboh/local-caption</span>
+   <span class="p">cd local-caption && python setup.py</span>
+2. read ./SKILL.md and follow it exactly.
+3. ask me for the file path (and the language if it isn't English).
+4. caption it:
+   <span class="p">python caption.py "&lt;my file&gt;" --lang en</span>
+   (song? add --content music · Hinglish? add --hinglish ·
+    want a look? --style hormozi|tiktok|beast|neon|gradient|clean)
+5. show me the output path:  &lt;my file&gt;.captioned.mp4
+
+If anything needs my input (file path, language, style), ask me first.</pre>
+      </div>
+    </section>
 
     <footer>
       MIT · built by <a href="https://alihamzakamboh.com">Ali Hamza Kamboh</a> · <a href="https://github.com/ahkamboh/local-caption">github.com/ahkamboh/local-caption</a>
@@ -132,6 +190,16 @@
       navigator.clipboard.writeText('python caption.py myvideo.mp4').then(() => {
         btn.textContent = 'copied ✓';
         setTimeout(() => (btn.textContent = 'copy'), 1600);
+      });
+    });
+
+    const pbtn = document.getElementById('copyPrompt');
+    pbtn.addEventListener('click', () => {
+      const text = document.getElementById('promptText').innerText
+        .split('\n').filter(l => !l.includes('paste me into your AI agent')).join('\n').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        pbtn.textContent = 'copied ✓';
+        setTimeout(() => (pbtn.textContent = 'copy prompt'), 1700);
       });
     });
   </script>
