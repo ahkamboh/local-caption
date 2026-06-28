@@ -18,11 +18,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ahkamboh/agent-caption/raw/master/assets/demo.mp4">
-    <img src="assets/demo-poster.png" width="640" alt="agent-caption demo — one video captioned in 11 languages" />
-  </a>
+  <video src="https://ahkamboh.github.io/agent-caption/assets/demo.mp4" poster="assets/demo-poster.png" width="720" controls muted loop playsinline></video>
   <br/>
-  <sub>▶ One video, captioned in <b>11 languages</b> — 1100+ supported · speech &amp; songs · 100% on-device · <a href="https://github.com/ahkamboh/agent-caption/raw/master/assets/demo.mp4">click to play</a></sub>
+  <sub>▶ One video, captioned in <b>11 languages</b> — 1100+ supported · speech &amp; songs · 100% on-device</sub>
 </p>
 
 ---
