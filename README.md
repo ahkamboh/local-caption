@@ -14,7 +14,15 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT" /> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python 3.10+" /> <img src="https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-lightgrey" alt="Platforms" /> <img src="https://img.shields.io/badge/100%25-local%20·%20offline-success" alt="100% local" /> <img src="https://img.shields.io/badge/languages-99-orange" alt="99 languages" />
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT" /> <img src="https://img.shields.io/badge/python-3.10%2B-blue" alt="Python 3.10+" /> <img src="https://img.shields.io/badge/Windows%20·%20macOS%20·%20Linux-lightgrey" alt="Platforms" /> <img src="https://img.shields.io/badge/100%25-local%20·%20offline-success" alt="100% local" /> <img src="https://img.shields.io/badge/languages-1100%2B-orange" alt="1100+ languages" /> <img src="https://img.shields.io/badge/speech%20·%20songs-ff6b4a" alt="speech and songs" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/ahkamboh/agent-caption/raw/master/assets/demo.mp4">
+    <img src="assets/demo-poster.png" width="640" alt="agent-caption demo — one video captioned in 11 languages" />
+  </a>
+  <br/>
+  <sub>▶ One video, captioned in <b>11 languages</b> — 1100+ supported · speech &amp; songs · 100% on-device · <a href="https://github.com/ahkamboh/agent-caption/raw/master/assets/demo.mp4">click to play</a></sub>
 </p>
 
 ---
